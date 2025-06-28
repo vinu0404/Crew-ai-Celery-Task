@@ -180,8 +180,8 @@ sequenceDiagram
 
 1. **Clone the Repository**
 ```bash
-git clone <repository-url>
-cd blood-test-analyzer
+git clone https://github.com/vinu0404/Crew-ai-Celery-Task.git
+cd Crew-ai-Celery-Task
 ```
 
 2. **Create Environment Variables**
@@ -480,12 +480,9 @@ redis:
   command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
 ```
 
-
-## 🤝 Development
-
 ### Project Structure
 ```
-blood-test-analyzer/
+Crew-ai-Celery-Task/
 ├── main.py              # FastAPI application
 ├── agents.py            # AI agent definitions
 ├── tasks.py             # CrewAI task definitions
