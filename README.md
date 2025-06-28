@@ -321,6 +321,15 @@ GET /analysis/{analysis_id}
 ```http
 GET /stats
 ```
+### Screenshots
+ 
+<img src="images/Screenshot 2025-06-28 224602.png" />
+
+<img src="images/Screenshot 2025-06-28 224631.png" />
+
+<img src="images/Screenshot 2025-06-28 224649.png" />
+
+<img src="images/Screenshot 2025-06-28 224711.png" />
 
 ### Example Usage
 
