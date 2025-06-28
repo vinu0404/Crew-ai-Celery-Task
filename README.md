@@ -2,6 +2,9 @@
 
 A comprehensive AI-powered system for analyzing blood test reports using multi-agent architecture with both synchronous and asynchronous processing capabilities.
 
+### How to Setup
+
+For a detailed video walkthrough of the setup process, [click here](https://drive.google.com/file/d/1P1MDRQm1g7Idhr6fwe4qjaEivr5wgciT/view?usp=sharing).
 ## 🏗️ Project Architecture
 
 ```mermaid
