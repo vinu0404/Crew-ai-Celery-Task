@@ -11,7 +11,7 @@ For a detailed video walkthrough of the setup process, [click here](https://driv
 ```mermaid
 graph TB
     subgraph "Client Layer"
-        UI[Web Interface/Postman]
+        UI[Swagger]
         API[API Requests]
     end
     
