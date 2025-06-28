@@ -2,10 +2,11 @@
 
 A comprehensive AI-powered system for analyzing blood test reports using multi-agent architecture with both synchronous and asynchronous processing capabilities.
 
-### How to Setup
+## Setup Video Tutorial
 
 For a detailed video walkthrough of the setup process, [click here](https://drive.google.com/file/d/1P1MDRQm1g7Idhr6fwe4qjaEivr5wgciT/view?usp=sharing).
-## 🏗️ Project Architecture
+
+## Project Architecture
 
 ```mermaid
 graph TB
@@ -94,7 +95,106 @@ graph TB
     style DB fill:#96ceb4
 ```
 
-## 🚀 Features
+## Major Bugs Fixed from Original System
+
+### 1. Import and Dependency Issues
+
+**Original Problems:**
+- Missing PDFLoader import in tools.py
+- Undefined llm variable in agents.py
+- Circular import issues between modules
+
+**Fixes Applied:**
+- Replaced missing imports with proper PyPDF2 implementation
+- Added proper LLM initialization with ChatOpenAI in agents.py
+- Restructured imports to eliminate circular dependencies
+- Added comprehensive environment variable management with .env file
+
+### 2. Agent Configuration Problems
+
+**Original Problems:**
+- Unprofessional agent backstories (Dr. House parody, supplement salesperson)
+- Goals focused on providing unreliable medical advice
+- Tools incorrectly configured as individual functions instead of lists
+
+**Fixes Applied:**
+- Professional Medical Doctor Agent: 15+ years experience in laboratory medicine
+- Document Verifier Agent: Medical records specialist for validation
+- Clinical Nutritionist: Certified with master's degree in nutrition science
+- Exercise Physiologist: Certified fitness specialist with medical expertise
+- Proper tool configuration with lists and appropriate tool assignments
+- Professional, evidence-based goals and backstories
+
+### 3. Task Definition Issues
+
+**Original Problems:**
+- Unprofessional task descriptions encouraging misinformation
+- Expected outputs requesting fake URLs and made-up medical advice
+- Tasks encouraging contradictory and harmful recommendations
+
+**Fixes Applied:**
+- Professional Task Descriptions: Evidence-based, medically accurate
+- Comprehensive Task Structure: Verification → Analysis → Nutrition → Exercise
+- Safety-First Approach: Emphasizes healthcare provider consultation
+- Context-Aware Tasks: Proper task dependencies and information flow
+- Medical Disclaimers: Built into all task outputs
+
+### 4. Tool Implementation Problems
+
+**Original Problems:**
+- BloodTestReportTool methods were async but not properly structured
+- Missing proper error handling
+- Tools not properly integrated with CrewAI framework
+
+**Fixes Applied:**
+- Synchronous Tool Implementation: Proper _run methods
+- Comprehensive Error Handling: File validation, permission checks, content verification
+- PDF Processing: Robust PyPDF2 implementation with text extraction
+- Input Validation: Pydantic schemas for all tool inputs
+- Proper Tool Integration: BaseTool inheritance with correct configurations
+
+### 5. API Issues
+
+**Original Problems:**
+- No proper error handling for file uploads
+- Missing validation for file types
+- No proper cleanup mechanisms
+- Single-threaded processing (no concurrency support)
+
+**Fixes Applied:**
+- Comprehensive File Validation: PDF type checking, size validation, existence verification
+- Robust Error Handling: HTTP exceptions with detailed error messages
+- File Cleanup: Automatic file removal after processing
+- Multiple Processing Options: Sync and async processing modes
+- CORS Support: Cross-origin request handling
+- Request Validation: Pydantic models for all endpoints
+
+### 6. Missing Core Functionality
+
+**Original Problems:**
+- No actual nutrition analysis implementation
+- No exercise planning logic
+
+**Fixes Applied:**
+- Intelligent Nutrition Analysis: Blood marker-specific dietary recommendations
+- Comprehensive Exercise Planning: Health condition-aware fitness recommendations
+- Evidence-Based Recommendations: Scientific approach to health advice
+- Safety Considerations: Medical clearance requirements and contraindications
+
+### 7. Security and Safety Issues
+
+**Original Problems:**
+- Code encouraged providing medical advice without proper disclaimers
+- No input validation
+- File handling without proper security checks
+
+**Fixes Applied:**
+- Medical Disclaimers: Required in all outputs
+- Professional Standards: Healthcare provider consultation emphasis
+- Secure File Handling: Path validation, permission checks
+- Input Sanitization: Comprehensive validation at all endpoints
+
+## Features
 
 ### Core Functionality
 - **PDF Blood Test Report Analysis**: Extract and interpret laboratory values from PDF reports
@@ -110,7 +210,7 @@ graph TB
 - **Docker Support**: Containerized Redis deployment
 - **Multi-Agent Architecture**: CrewAI-powered intelligent agent coordination
 
-## 🏛️ System Architecture
+## System Architecture
 
 ### Processing Modes
 
@@ -169,7 +269,7 @@ sequenceDiagram
     FastAPI-->>Client: Analysis Results
 ```
 
-## 🛠️ Installation & Setup
+##  Installation & Setup
 
 ### Prerequisites
 - Python 3.10+
@@ -178,13 +278,13 @@ sequenceDiagram
 
 ### Environment Setup
 
-1. **Clone the Repository**
+#### 1. Clone the Repository
 ```bash
-git clone <repository-url>
-cd blood-test-analyzer
+git clone https://github.com/vinu0404/Crew-ai-Celery-Task.git
+cd Crew-ai-Celery-Task
 ```
 
-2. **Create Environment Variables**
+#### 2. Create Environment Variables
 Create a `.env` file with:
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
@@ -197,25 +297,25 @@ CELERY_RESULT_BACKEND=redis://localhost:6379/0
 
 ### Quick Start (Windows)
 
-**Option 1: Full Setup**
+#### Option 1: Full Setup
 ```powershell
 ./run.ps1
 ```
 
-**Option 2: Quick Run (if environment exists)**
+#### Option 2: Quick Run (if environment exists)
 ```powershell
 ./quick_run.ps1
 ```
 
 ### Manual Setup
 
-1. **Create Conda Environment**
+#### 1. Create Conda Environment
 ```bash
 conda create -n blood_test_env python=3.10 -y
 conda activate blood_test_env
 ```
 
-2. **Install Dependencies**
+#### 2. Install Dependencies
 ```bash
 # Core packages via conda-forge
 conda install -c conda-forge fastapi uvicorn python-dotenv python-multipart redis-py sqlalchemy alembic pydantic onnxruntime tokenizers tqdm -y
@@ -224,12 +324,12 @@ conda install -c conda-forge fastapi uvicorn python-dotenv python-multipart redi
 pip install crewai crewai-tools PyPDF2 langchain-community openai celery chromadb
 ```
 
-3. **Start Redis (Docker)**
+#### 3. Start Redis (Docker)
 ```bash
 docker run -d -p 6379:6379 redis:latest
 ```
 
-4. **Initialize Database**
+#### 4. Initialize Database
 ```python
 python -c "from database import init_db; init_db()"
 ```
@@ -247,21 +347,21 @@ docker-compose logs -f
 docker-compose down
 ```
 
-## 🚦 Usage
+## Usage
 
 ### Starting the Services
 
-1. **Start Redis (if not using Docker Compose)**
+#### 1. Start Redis (if not using Docker Compose)
 ```bash
 docker run -d -p 6379:6379 redis:latest
 ```
 
-2. **Start the FastAPI Server**
+#### 2. Start the FastAPI Server
 ```bash
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-3. **Start Celery Worker (for async processing)**
+#### 3. Start Celery Worker (for async processing)
 ```bash
 # Windows
 ./start_celery.ps1
@@ -324,15 +424,16 @@ GET /analysis/{analysis_id}
 ```http
 GET /stats
 ```
+
 ### Screenshots
- 
-<img src="images/Screenshot 2025-06-28 224602.png" />
 
-<img src="images/Screenshot 2025-06-28 224631.png" />
+![Screenshot 1](images/Screenshot%202025-06-28%20224602.png)
 
-<img src="images/Screenshot 2025-06-28 224649.png" />
+![Screenshot 2](images/Screenshot%202025-06-28%20224631.png)
 
-<img src="images/Screenshot 2025-06-28 224711.png" />
+![Screenshot 3](images/Screenshot%202025-06-28%20224649.png)
+
+![Screenshot 4](images/Screenshot%202025-06-28%20224711.png)
 
 ### Example Usage
 
@@ -369,30 +470,30 @@ status_response = requests.get(f'http://localhost:8000/task/{task_id}')
 print(status_response.json())
 ```
 
-## 🤖 Agent System
+##  Agent System
 
 ### Agent Roles
 
-1. **Medical Doctor Agent**
-   - Primary medical analysis
-   - Laboratory value interpretation
-   - Clinical significance assessment
-   - Health risk identification
+#### 1. Medical Doctor Agent
+- Primary medical analysis
+- Laboratory value interpretation
+- Clinical significance assessment
+- Health risk identification
 
-2. **Verifier Agent**
-   - Document validation
-   - Data extraction verification
-   - Quality assurance
+#### 2. Verifier Agent
+- Document validation
+- Data extraction verification
+- Quality assurance
 
-3. **Nutrition Specialist Agent**
-   - Nutritional deficiency analysis
-   - Dietary recommendations
-   - Supplement suggestions
+#### 3. Nutrition Specialist Agent
+- Nutritional deficiency analysis
+- Dietary recommendations
+- Supplement suggestions
 
-4. **Exercise Specialist Agent**
-   - Exercise safety assessment
-   - Fitness recommendations
-   - Activity planning
+#### 4. Exercise Specialist Agent
+- Exercise safety assessment
+- Fitness recommendations
+- Activity planning
 
 ### Task Coordination
 
@@ -406,7 +507,7 @@ graph LR
     E --> F
 ```
 
-## 🗄️ Database Schema
+##  Database Schema
 
 ```sql
 -- Blood Analysis Table
@@ -429,7 +530,7 @@ CREATE TABLE users (
 );
 ```
 
-## 📊 Monitoring & Debugging
+## Monitoring & Debugging
 
 ### Health Checks
 - **API Health**: `GET /health`
@@ -443,36 +544,36 @@ CREATE TABLE users (
 
 ### Common Issues
 
-1. **Redis Connection Failed**
-   ```bash
-   # Check if Redis is running
-   docker ps | grep redis
-   
-   # Start Redis if not running
-   docker run -d -p 6379:6379 redis:latest
-   ```
+#### 1. Redis Connection Failed
+```bash
+# Check if Redis is running
+docker ps | grep redis
 
-2. **File Not Found Errors**
-   - Ensure `data/` directory exists
-   - Check file permissions
-   - Verify absolute paths in Celery worker
+# Start Redis if not running
+docker run -d -p 6379:6379 redis:latest
+```
 
-3. **API Key Issues**
-   - Verify `.env` file exists and is properly formatted
-   - Check OpenAI API key validity
-   - Ensure Serper API key is active
+#### 2. File Not Found Errors
+- Ensure `data/` directory exists
+- Check file permissions
+- Verify absolute paths in Celery worker
 
-## 🚀 Performance Optimization
+#### 3. API Key Issues
+- Verify `.env` file exists and is properly formatted
+- Check OpenAI API key validity
+- Ensure Serper API key is active
+
+##  Performance Optimization
 
 ### Scaling Considerations
 
-1. **Multiple Celery Workers**
+#### 1. Multiple Celery Workers
 ```bash
 # Start multiple workers
 celery -A celery_worker worker --concurrency=4 --loglevel=info
 ```
 
-2. **Redis Configuration**
+#### 2. Redis Configuration
 ```yaml
 # docker-compose.yml
 redis:
@@ -480,12 +581,9 @@ redis:
   command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
 ```
 
-
-## 🤝 Development
-
 ### Project Structure
 ```
-blood-test-analyzer/
+Crew-ai-Celery-Task/
 ├── main.py              # FastAPI application
 ├── agents.py            # AI agent definitions
 ├── tasks.py             # CrewAI task definitions
@@ -497,8 +595,33 @@ blood-test-analyzer/
 ├── Dockerfile          # Container definition
 ├── .env                # Environment variables
 ├── data/               # Temporary file storage
-├── run.ps1         # Full setup script
-├── quick_run.ps1   # Quick start script
-└── start_celery.ps1 # Celery worker script
+├── run.ps1             # Full setup script
+├── quick_run.ps1       # Quick start script
+└── start_celery.ps1    # Celery worker script
 ```
 
+##  Requirements
+
+### Core Dependencies
+- FastAPI
+- uvicorn
+- crewai
+- openai
+- celery
+- redis
+- PyPDF2
+- SQLAlchemy
+- Pydantic
+
+### Development Dependencies
+- python-multipart
+- python-dotenv
+- chromadb
+- langchain-community
+- crewai-tools
+
+- **CrewAI** for the multi-agent framework
+- **FastAPI** for the web framework
+- **OpenAI** for the language models
+- **Celery** for distributed task processing
+- **Redis** for caching and message brokering
