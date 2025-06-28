@@ -477,18 +477,6 @@ redis:
   command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
 ```
 
-3. **Database Optimization**
-- Consider PostgreSQL for production
-- Implement connection pooling
-- Add database indices
-
-## 🔒 Security Considerations
-
-- File upload validation (PDF only)
-- File size limits
-- Temporary file cleanup
-- API rate limiting (recommended)
-- Environment variable protection
 
 ## 🤝 Development
 
@@ -506,44 +494,8 @@ blood-test-analyzer/
 ├── Dockerfile          # Container definition
 ├── .env                # Environment variables
 ├── data/               # Temporary file storage
-└── scripts/
-    ├── run.ps1         # Full setup script
-    ├── quick_run.ps1   # Quick start script
-    └── start_celery.ps1 # Celery worker script
+├── run.ps1         # Full setup script
+├── quick_run.ps1   # Quick start script
+└── start_celery.ps1 # Celery worker script
 ```
 
-### Adding New Features
-
-1. **New Agent**: Add to `agents.py`
-2. **New Task**: Add to `tasks.py`
-3. **New Tool**: Add to `tools.py`
-4. **New Endpoint**: Add to `main.py`
-5. **New Celery Task**: Add to `celery_worker.py`
-
-## 📈 Future Enhancements
-
-- [ ] Web-based UI
-- [ ] Multi-format support (images, different PDFs)
-- [ ] User authentication
-- [ ] Report templates
-- [ ] Email notifications
-- [ ] Advanced analytics dashboard
-- [ ] API rate limiting
-- [ ] Caching layer
-- [ ] Kubernetes deployment
-
-## 📄 License
-
-[Add your license information here]
-
-## 🙋‍♂️ Support
-
-For issues and questions:
-1. Check the troubleshooting section above
-2. Review the logs for error messages
-3. Ensure all dependencies are properly installed
-4. Verify environment variables are set correctly
-
----
-
-**Note**: This system is for educational and informational purposes only. Always consult with qualified healthcare professionals for medical advice and interpretation of blood test results.
